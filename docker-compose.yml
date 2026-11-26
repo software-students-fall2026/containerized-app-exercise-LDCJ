@@ -1,0 +1,16 @@
+services:
+  web-app:
+    build: ./web-app
+    ports:
+      - 5001:5001
+    environment:
+      MONGO_URI: mongodb://mongodb:27017
+      MONGO_DBNAME: rps
+      ML_CLIENT_URL: http://machine-learning-client:8000/predict
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
