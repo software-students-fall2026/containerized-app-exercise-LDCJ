@@ -15,13 +15,12 @@ def get_collection():
     return client[os.getenv("MONGO_DBNAME", "rps")]["predictions"]
 
 
-def save_prediction(collection, prediction, image_size):
+def save_prediction(collection, prediction):
     """Store one prediction with its time. Returns the saved document."""
     document = {
         "move": prediction["move"],
         "confidence": prediction["confidence"],
         "gesture": prediction["gesture"],
-        "image_size": image_size,
         "created_at": datetime.now(timezone.utc),
     }
     collection.insert_one(document)
