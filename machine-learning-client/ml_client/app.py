@@ -2,20 +2,27 @@
 
 import os
 
+from dotenv import load_dotenv
 from flask import Flask, jsonify, request
+from pymongo.errors import PyMongoError
 
-from ml_client import recognizer
+from ml_client import db, recognizer
 
 
-def create_app(gesture_recognizer=None):
-    """Create the app. The model loads on the first photo, not at startup."""
+def create_app(gesture_recognizer=None, collection=None):
+    """Create the app. Tests pass in a fake recognizer and collection."""
     app = Flask(__name__)
-    state = {"recognizer": gesture_recognizer}
+    state = {"recognizer": gesture_recognizer, "collection": collection}
 
     def get_recognizer():
         if state["recognizer"] is None:
             state["recognizer"] = recognizer.create_recognizer()
         return state["recognizer"]
+
+    def get_collection():
+        if state["collection"] is None:
+            state["collection"] = db.get_collection()
+        return state["collection"]
 
     @app.get("/health")
     def health():
@@ -33,6 +40,12 @@ def create_app(gesture_recognizer=None):
         prediction = recognizer.predict(get_recognizer(), image_bytes)
         if prediction is None:
             return jsonify(error="Could not read that image."), 400
+
+        try:
+            db.save_prediction(get_collection(), prediction)
+        except PyMongoError:
+            app.logger.exception("Could not save prediction")
+
         if prediction["move"] == "no_hand":
             return jsonify(error="No hand found in the photo."), 422
         return jsonify(move=prediction["move"], confidence=prediction["confidence"])
@@ -41,4 +54,5 @@ def create_app(gesture_recognizer=None):
 
 
 if __name__ == "__main__":
+    load_dotenv()
     create_app().run(host="0.0.0.0", port=int(os.getenv("ML_CLIENT_PORT", "8000")))
