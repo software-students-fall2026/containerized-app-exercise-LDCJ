@@ -1,0 +1,7 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=ml_client --cov-report=term-missing --cov-fail-under=80"
+
+[tool.pylint.typecheck]
+# cv2 is compiled code that pylint cannot read, so trust its functions exist
+generated-members = ["cv2.*"]
