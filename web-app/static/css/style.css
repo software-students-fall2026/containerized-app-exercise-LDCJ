@@ -1,0 +1,219 @@
+:root {
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+    color: #20223a;
+    background: #f4f2fb;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px 20px;
+    background:
+      radial-gradient(ellipse at 15% 0%, #e8e1ff 0, transparent 40%),
+      #f4f2fb;
+  }
+  
+  main {
+    width: min(100%, 900px);
+    margin: 0 auto;
+    padding: clamp(24px, 5vw, 56px);
+    border: 1px solid #e9e6f1;
+    border-radius: 28px;
+    background: #fff;
+    box-shadow: 0 24px 70px rgb(42 35 75 / 10%);
+  }
+  
+  h1 {
+    margin: 0 0 12px;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -0.06em;
+  }
+  
+  p {
+    color: #686a7d;
+    line-height: 1.65;
+  }
+  
+  video,
+  #preview {
+    display: block;
+    width: min(100%, 720px);
+    aspect-ratio: 4 / 3;
+    margin: 28px auto 18px 0;
+    border: 1px solid #e2deed;
+    border-radius: 20px;
+    background: #191a2c;
+    object-fit: cover;
+    box-shadow: 0 12px 32px rgb(32 34 58 / 12%);
+  }
+  
+  #canvas {
+    display: none;
+  }
+  
+  [hidden] {
+    display: none !important;
+  }
+  
+  button {
+    min-height: 46px;
+    margin: 4px 8px 4px 0;
+    padding: 0 18px;
+    border: 1px solid #dedbea;
+    border-radius: 12px;
+    background: #fff;
+    color: #34344f;
+    font: inherit;
+    font-weight: 650;
+    cursor: pointer;
+    transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+  }
+  
+  button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgb(32 34 58 / 12%);
+  }
+  
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.48;
+  }
+  
+  #send-photo {
+    border-color: #5b4bd8;
+    background: #5b4bd8;
+    color: #fff;
+  }
+  
+  #send-photo:hover:not(:disabled) {
+    background: #4939c5;
+  }
+  
+  #status {
+    min-height: 1.5em;
+    margin-top: 18px;
+    color: #686a7d;
+  }
+  
+  #result {
+    margin-top: 20px;
+    padding: 18px 20px;
+    border: 1px solid #e5e0fa;
+    border-radius: 16px;
+    background: #f7f5ff;
+    color: #30256f;
+    font-size: 1.1rem;
+    font-weight: 650;
+  }
+
+  .history-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    background: #5b4bd8;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 150ms ease, transform 150ms ease;
+  }
+  
+  .history-link:hover {
+    transform: translateY(-2px);
+    background: #4939c5;
+  }
+  
+  .history-link:focus-visible {
+    outline: 3px solid #a9a0ff;
+    outline-offset: 3px;
+  }
+  
+  @media (max-width: 600px) {
+    body {
+      padding: 16px 12px;
+    }
+  
+    main {
+      padding: 24px 18px;
+      border-radius: 20px;
+    }
+  
+    button {
+      margin-right: 4px;
+      padding: 0 13px;
+    }
+  }
+
+  main > h2 {
+    margin-top: 36px;
+    color: #20223a;
+    font-size: 1.5rem;
+  }
+  
+  h2 + ul {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 18px 0 32px;
+    padding: 0;
+    list-style: none;
+  }
+  
+  h2 + ul li {
+    padding: 20px;
+    border: 1px solid #e5e0fa;
+    border-radius: 16px;
+    background: #f7f5ff;
+    color: #30256f;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  
+  table {
+    width: 100%;
+    margin-top: 18px;
+    border: 1px solid #e5e0fa;
+    border-radius: 16px;
+    border-spacing: 0;
+    overflow: hidden;
+    text-align: left;
+  }
+  
+  th,
+  td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #eceaf3;
+  }
+  
+  th {
+    background: #f7f5ff;
+    color: #484568;
+    font-size: 0.9rem;
+  }
+  
+  tr:last-child td {
+    border-bottom: 0;
+  }
+  
+  @media (max-width: 600px) {
+    h2 + ul {
+      grid-template-columns: 1fr;
+    }
+  
+    table {
+      font-size: 0.9rem;
+    }
+  
+    th,
+    td {
+      padding: 10px;
+    }
+  }
